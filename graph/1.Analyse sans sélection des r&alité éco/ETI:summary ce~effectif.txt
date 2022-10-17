@@ -1,0 +1,21 @@
+
+
+Call:
+lm(formula = effectif ~ ca, data = data_for_lm_eti)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3159.9   -67.9   -50.8     1.9  4564.8 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 7.540e+01  1.193e+00    63.2   <2e-16 ***
+ca          1.455e-06  1.049e-08   138.7   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 232 on 43501 degrees of freedom
+  (1496 observations effacées parce que manquantes)
+Multiple R-squared:  0.3067,	Adjusted R-squared:  0.3067 
+F-statistic: 1.924e+04 on 1 and 43501 DF,  p-value: < 2.2e-16
+
