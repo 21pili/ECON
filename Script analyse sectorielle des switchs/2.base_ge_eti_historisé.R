@@ -30,19 +30,10 @@ data_eti <- readRDS("Intermediate/eti_acti_insee.rds") %>%
         categorie_entreprise = "ETI"
     )
 
-data_pme_switch <- readRDS("Intermediate/pme_switch_acti_insee.rds") %>%
-    mutate(
-        ca = as.integer(ca),
-        resultat = as.integer(resultat),
-        categoriejuridiqueunitelegale = as.character(categoriejuridiqueunitelegale), # nolint
-        effectif = as.integer(effectif),
-        categorie_entreprise = "ETI"
-    )
-
 
 # Traitement
 
-data <- bind_rows(data_eti, data_ge, data_pme_switch) %>%
+data <- bind_rows(data_eti, data_ge) %>%
     group_by(siren) %>%
     summarise(
         annee_base = paste((annee_base), collapse = ", "),
