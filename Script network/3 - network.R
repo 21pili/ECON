@@ -15,9 +15,10 @@ library(stringr)
 
 # Importations
 
-seeds <- readRDS("Intermediate/seeds.rds")
+seeds <- readRDS("Intermediate/seeds_2.rds")
 
-dir_def <- readRDS("Intermediate/links.rds")
+dir_def <- readRDS("Intermediate/links.rds") %>%
+    distinct(siren, .keep_all = "T")
 
 base_app <- base_app <- list(
     readRDS("Input/eti_base_app.rds"),
@@ -37,6 +38,7 @@ explore <- function(sir) {
     if ((sir %in% base_app$siren) & (sir %in% dir_def$siren)) {
         sub <- subset(dir_def, siren == sir)
         parent <- sub$parent
+        print("ici")
         print(parent)
         from <<- from %>% append(parent)
         to <<- to %>% append(sir)
@@ -61,9 +63,6 @@ dfs_recursif <- function(seeds) {
 }
 
 dfs_recursif(seeds)
-
-len <- length(from)
-from <- from[1:len - 2]
 
 network <- tibble(
     from,

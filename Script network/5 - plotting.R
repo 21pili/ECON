@@ -25,9 +25,9 @@ network <- readRDS("Intermediate/network_label.rds")
 p <- simpleNetwork(network, height="100px", width="100px",        
         Source = 1,                 # column number of source
         Target = 2,                 # column number of target
-        linkDistance = 2,          # distance between node. Increase this value to have more space between nodes
-        charge = -900,                # numeric value indicating either the strength of the node repulsion (negative value) or attraction (positive value)
-        fontSize = 14,               # size of the node names
+        linkDistance = 30,          # distance between node. Increase this value to have more space between nodes
+        charge = -100,                # numeric value indicating either the strength of the node repulsion (negative value) or attraction (positive value)
+        fontSize = 20,               # size of the node names
         fontFamily = "serif",       # font og node names
         linkColour = "#666",        # colour of edges, MUST be a common colour for the whole graph
         nodeColour = "#000000",     # colour of nodes, MUST be a common colour for the whole graph
@@ -38,5 +38,5 @@ p <- simpleNetwork(network, height="100px", width="100px",
 p
 
 # save the widget
-library(htmlwidgets)
-saveWidget(p, "graph/wg/network_1.html")
+
+#saveWidget(p, "graph/wg/network_1.html")
