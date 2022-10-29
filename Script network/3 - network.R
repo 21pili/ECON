@@ -15,7 +15,7 @@ library(stringr)
 
 # Importations
 
-seeds <- readRDS("Intermediate/seeds_2.rds")
+seeds <- readRDS("Intermediate/seeds.rds")
 
 dir_def <- readRDS("Intermediate/links.rds") %>%
     distinct(siren, .keep_all = "T")
@@ -38,14 +38,11 @@ explore <- function(sir) {
     if ((sir %in% base_app$siren) & (sir %in% dir_def$siren)) {
         sub <- subset(dir_def, siren == sir)
         parent <- sub$parent
-        print("ici")
-        print(parent)
         from <<- from %>% append(parent)
         to <<- to %>% append(sir)
     }
     else {
         parent <- ""
-        print(parent)
     }
     if (!(parent %in% flagged)) {
         explore(parent)
@@ -54,8 +51,6 @@ explore <- function(sir) {
 
 dfs_recursif <- function(seeds) {
     for (siren in seeds$siren){
-        print("seed : ")
-        print(siren)
         if (!(siren %in% flagged)) {
             explore(siren)
         }
