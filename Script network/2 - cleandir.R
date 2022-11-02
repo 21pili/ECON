@@ -44,10 +44,30 @@ traitement <- function(df) {
   return(df)
 }
 
-dir_def <- readRDS("Input/dir_def.rds") %>%
+dir_def <- list(
+        readRDS("Input/ge_dir_def.rds"),
+        readRDS("Input/eti_dir_def.rds")
+    ) %>%
+    bind_rows() %>%
+    distinct(siren, .keep_all = "T") %>%
     filter(
         Titre == "Président" |
-        Titre == "président") %>%
+        Titre == "Gérant" |
+        Titre == "Associé" |
+        Titre == "Administrateur" |
+        Titre == "Directeur général" |
+        Titre == "Associé indéfiniment responsable" |
+        Titre == "gérant" |
+        Titre == "président" |
+        Titre == "Gérant, Associé" |
+        Titre == "Associé en nom" |
+        Titre == "administrateur" |
+        Titre == "directeur général" |
+        Titre == "Gérant, Associé indéfiniment responsable" |
+        Titre == "Associé indéfiniment et solidairement responsable" |
+        Titre == "Directeur général délégué" |
+        Titre == "Gérant non associé" |
+        Titre == "Président du conseil d'administration") %>%
     mutate(
         parent = NA
     )

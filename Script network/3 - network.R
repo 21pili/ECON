@@ -15,17 +15,17 @@ library(stringr)
 
 # Importations
 
-seeds <- readRDS("Intermediate/seeds.rds")
-
-dir_def <- readRDS("Intermediate/links.rds") %>%
-    distinct(siren, .keep_all = "T")
-
 base_app <- base_app <- list(
     readRDS("Input/eti_base_app.rds"),
     readRDS("Input/ge_base_app.rds")
     ) %>%
     bind_rows() %>%
     filter(annee_base == 2022)
+
+seeds <- tibble(siren = base_app$siren)
+
+dir_def <- readRDS("Intermediate/links.rds") %>%
+    distinct(siren, .keep_all = "T")
 
 from <<- c()
 to <<- c()
