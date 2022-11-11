@@ -1,0 +1,307 @@
+% AEJ-Article.tex for AEA last revised 22 June 2011
+\documentclass[AEJ]{AEA}
+\usepackage{graphicx}
+% The mathtime package uses a Times font instead of Computer Modern.
+% Uncomment the line below if you wish to use the mathtime package:
+%\usepackage[cmbold]{mathtime}
+% Note that miktex, by default, configures the mathtime package to use commercial fonts
+% which you may not have. If you would like to use mathtime but you are seeing error
+% messages about missing fonts (mtex.pfb, mtsy.pfb, or rmtmi.pfb) then please see
+% the technical support document at http://www.aeaweb.org/templates/technical_support.pdf
+% for instructions on fixing this problem.
+
+% Note: you may use either harvard or natbib (but not both) to provide a wider
+% variety of citation commands than latex supports natively. See below.
+
+% Uncomment the next line to use the natbib package with bibtex 
+%\usepackage{natbib}
+
+% Uncomment the next line to use the harvard package with bibtex
+%\usepackage[abbr]{harvard}
+
+% This command determines the leading (vertical space between lines) in draft mode
+% with 1.5 corresponding to "double" spacing.
+\draftSpacing{1.5}
+
+\begin{document}
+
+\title{Category Switch Analysis of French Companies  the SIRENE database}
+\shortTitle{Category Switch Analysis}
+\author{Pierre PILI and Alexandre GAVAUDAN\thanks{%
+PILI : pierre.pili@etu.minesparis.psl.eu GAVAUDAN: alexandre.gavaudan.minesparis.psl.eu}}
+\date{\today}
+\pubMonth{November}
+\pubYear{2022}
+\JEL{}
+\Keywords{}
+
+\begin{abstract}
+%INTRODUCTION
+The French National Institute of Statistics and Economical Studies divides all companies in three categories,
+small companies, intermediate companies and large firms.
+%OBJECTIF
+This study focuses on the factors driving the switches of a company from a category to another.
+%METHOD
+To do so, we used the SIRENE database to which we added the INPI and Infogreffe databases.
+Those databases are built on the legal structure of a company which is a collection of legal units.
+Therefore, we neither have information about companies nor about how legal units are related.
+We built another database linking legal units running other legal units through which we analyzed the company switches.
+%RESULTS
+The results of our study show that the switches are hardly related to the information about legal units and seem to be a result
+of financial operations that are not related to the economic reality of a company.
+%CONCLUSION
+Legal units is not a relevant structure to analyze companies, to make relevant studies, efforts must be put into
+profiling companies and precisely linking legal units together to build objects that reflect the economic reality of each firm. 
+\end{abstract}
+\maketitle
+\section{Contexte de l'étude}
+We all have a basic intuition of what a company is, but does it corresponds to
+either an economic or legal reality ? According to the INSEE, a company is
+the smallest combination of legal units forming an organizational entity, 
+which produces goods and sevices, and enjoys a certain amount of decisional autonomy.
+It is crucial to understand that a company does not correspond to any legal reality, it is only a statistical unit.
+But how does the INSEE identify companies ?
+How are the statistical categories defined ?
+\subsection{From legal units to companies}
+A company is formed by a collection of legal units. A legal unit is defined as a
+legal entity in either the private or public legislation. This legal unit can be :
+\begin{itemize}
+    \item A legal unit acknowledged by the law independantly from the persons or institutions
+which either own it or are a member of it.
+    \item A natural person who can independantly carry out an economic activity 
+\end{itemize}
+
+A legal unit must be declared to competent authorities (Clerks of the Commercial Courts, Social Security, Public Finance Directorate...) to exist.
+The existence of such a legal unit depends on the choices of its owners or creators 
+(for organizational, legal or fiscal reasons).
+The legal unit is the legal entity registered in the SIRENE database. 
+Each legal unit is associated with a unique siren number.\newline
+
+For instance, ALBÉA is an industrial company producing packages in the cosmetic field.
+As we can see in the table below, it is formed by at least 7 legal units. We do not know if other legal units are
+related to this company. The company does not have to put its name in the
+legal denomination of its legal units. Each unit is related to a specific economic activity.
+For instance, ALBÉA TUBES FRANCE is the legal unit taking care of the factories in Europe.
+\begin{table}
+    \begin{tabular}{l|l}
+        \hline
+        siren & denominationunitelegale \\
+        \hline
+        310949623 & ALBEA COSMETICS FRANCE \\
+        \hline
+        342438785 & ALBEA SIMANDRE \\
+        \hline
+        377679840 & ALBEA TUBES FRANCE \\
+        \hline
+        400273116 & ALBEA COSMETICS SERVICES S.A.S. \\
+        \hline
+        648202216 & ALBEA SERVICES \\
+        \hline
+        842868184 & ALBEA MANAGEMENT SOLUTIONS AND SERVICES \\
+        \hline
+        538012881 & ALBEA EXPLOITATION \\
+        \hline
+    \end{tabular}
+    \caption{Siren number and denomination of the legal units in the Sirene database containing the word ALBEA}
+\end{table}
+\subsection{Attribution d'une catégorie statistique}
+The INSEE associates a certain category to each company using a statistical definition.
+This definition is based on the number of employees, the turnover, and the financial statement
+and is described in the appendix. The category of each legal unit is related to the company it belongs to.
+It means that the INSEE must know the links between all the legal units to come up with a
+realistic result. Let us have a look at the company ALBÉA. The table 2 shows that... 
+\newline
+\begin{table}
+    \begin{tabular}{l|l|l}
+        \hline
+        siren & denominationunitelegale & category \\
+        \hline
+        310949623 & ALBEA COSMETICS FRANCE & ETI \\
+        \hline
+        342438785 & ALBEA SIMANDRE & ETI \\
+        \hline
+        377679840 & ALBEA TUBES FRANCE & ETI \\
+        \hline
+        400273116 & ALBEA COSMETICS SERVICES S.A.S. & ETI \\
+        \hline
+        648202216 & ALBEA SERVICES & ETI \\
+        \hline
+        842868184 & ALBEA MANAGEMENT SOLUTIONS AND SERVICES & ETI \\
+        \hline
+        538012881 & ALBEA EXPLOITATION & GE \\
+        \hline
+    \end{tabular}
+    \caption{Siren number, denomination and category of the legal units in the Sirene database in 2022 containing the word ALBEA}
+\end{table}
+\subsection{Cadre de l'étude et hypothèses}
+The idea of this study is to identify the factors driving the category switches.
+The way it is defined means that it is obviously related to the size of each company,
+but is this still true at the legal unit level ? Is there a way to identify companies~?
+\section{Aggrégation d'une première base de données}
+\subsection{Les bases de données SIRENE et Infogreffe}
+\subsubsection{The SIRENE database}
+SIRENE is a database built on the legal definition of economic entities
+formed by legal units. Each line corresponds to a legal unit. Here is an example
+of a line of the SIRENE database with a legal unit from the company ALBÉA in 2022.
+\begin{table}
+    \begin{tabular}{l|l|c}
+        \hline
+        variable & type & ALBEA SIMANDRE \\
+        \hline
+        siren & string & 342438785 \\
+        \hline
+        denominationunitelegale & string & ALBEA SIMANDRE \\
+        \hline
+        categoriejuridiqueunitelegale  & string & 5710 \\
+        \hline
+        activiteprincipaleunitelegale & string & 22.22Z \\
+        \hline
+        annee\_base & int & 2022 \\
+        \hline
+        libtrancheeffectifsunitelegale & string & 250 à 499 salariés \\
+        \hline
+        nombre\_etablissements & int & 1 \\
+        \hline
+        siret\_siege & string & 34243878500038 \\
+        \hline
+        plus\_ancien\_etab & string & 1997-04-30 \\
+        \hline
+        category & string & ETI \\
+        \hline
+    \end{tabular}
+    \caption{An example of a line in the SIRENE database}
+\end{table}
+
+\begin{table}
+    \begin{tabular}{l|c|c|c}
+        \hline
+        variable & relative frequency & mean & standard deviation \\
+        \hline
+        siren & 100\% & NA & NA \\
+        \hline
+        denominationunitelegale & 100\% & NA & NA \\
+        \hline
+        categoriejuridiqueunitelegale  \\
+        \hline
+        activiteprincipaleunitelegale \\
+        \hline
+        annee\_base & 100\% & NA & NA \\
+        \hline
+        libtrancheeffectifsunitelegale \\
+        \hline
+        nombre\_etablissements \\
+        \hline
+        siret\_siege \\
+        \hline
+        plus\_ancien\_etab \\
+        \hline
+        category \\
+        \hline
+    \end{tabular}
+    \caption{Statistical analysis of the SIRENE variables}
+\end{table}
+\subsubsection{The INFOGREFFE database}
+Infogreffe.fr is a website which hosts data about each legal units such as their turnover, their result
+and their number of employees. We scrapped this website in order to have
+quantitative information about legal units. The table 5 describes the variables we managed to
+scrap. We then joined this table on the SIRENE database.
+\begin{table}
+    \begin{tabular}{l|c|c|c}
+        \hline
+        variable & relative frequency & mean & standard deviation \\
+        \hline
+        turnover & 100\% & NA & NA \\
+        \hline
+        result & 100\% & NA & NA \\
+        \hline
+        effectif & 100\% & NA & NA \\
+        \hline 
+    \end{tabular}
+    \caption{Statistical analysis of the INFOGREFFE variables}
+\end{table}
+\subsubsection{Geolocalization of legal units}
+In the SIRENE database we also have access to the adress of the main facility,
+which we converted into a latitude and a longitude variable.
+\begin{table}
+    \begin{tabular}{l|c|c|c}
+        \hline
+        variable & relative frequency \\
+        \hline
+        longitude & 100\% \\
+        \hline
+        latitude & 100\% \\
+        \hline
+    \end{tabular}
+    \caption{Statistical analysis of the longitude and latitude variables}
+\end{table}
+\subsection{Descriptive statistics}
+\subsection{Modèles et résultats économétriques}
+\subsection{Conclusion et limites}
+The previous graphs show that despite a thorough cleaning of the database, the results remain insignificant.
+The data does not seem to significantly explain the category switches.
+We decided thus decided to analyze about 50 switches, to see if we could understand the factors driving them.
+What we found is that we could label three types of switches : natural switches, intermediate switches and purchase based switches.
+\subsubsection{Natural switches}
+A natural switch occurs when a legal unit is directly associated with a company that is either
+growing or shrinking enough to reach a resonable switching size according to the INSEE standards.
+In our random sample, we labeled the legal unit \textit{see-d} as a natural switch. It has been created in
+2014 and is a fast growing tech company. It thus seemed to us that it could be labeled as a natural switch.
+This is the only natural switch we found in our sample. 
+\subsubsection{Intermediate switches}
+An intermediate switch occurs when the studied legal unit switches because of a natural switch of its owner.
+\subsubsection{Purchase based switches}
+A purchase based switch occurs when a legal unit switches because it has been bought by a company from another cateogory.
+\subsubsection{Results of our qualitative approach}
+\begin{table}
+    \begin{tabular}{c|c|c}
+        \hline
+        natural & intermediate & purchase based \\
+        \hline
+        1\% & 90\% & 9\% \\
+        \hline
+    \end{tabular}
+    \caption{Frequency of each label among a random sample of 50 identified switches}
+\end{table}
+What we see is that the switches are almost always very complex and that they correspond to
+a level that goes beyond the unit legal level. It seemed to us that the legal unit level
+was not a relevant approach to understand the switches.
+\section{Construction d'un réseau d'unités légales}
+\subsection{Méthode de construction}
+We needed a way to connect the related legal units together in order to
+build objects that have an economic meaning. We figured that we could
+find the owner of each legal unit on the website inpi.fr.
+Sometimes the owner is a person and we do not go any futher, sometimes it is a legal unit
+and we can find its siren number in the SIRENE database.
+Thus we associated to each legal unit its owner.
+This encodes a graph which describes the links between all the legal units.
+Our nodes are the legal units, a link from one node to another describes a possession relationship.
+This graph is oriented, indeed, possession is not a symetrical relationship.
+We finally created a new database formed by all the sub-connected graphs derived from the graph of all legal units.
+Each line corresponds to a sub-connected graph we now call a structure.
+We used the SIRENE variables, and added a few brought by the graph theory.
+\begin{figure}
+    \includegraphics[scale = 0.1]{GUSTAVIA CONSULTING.png}
+    \caption{Structure owned by the company Gustavia Consulting}
+\end{figure}
+The previous graph has a size of 
+\subsection{Descriptive statistics}
+\subsection{Modèle et résultats économétriques}
+\subsection{Conclusions et limites}
+
+
+
+
+
+References here (manual or bibTeX). If you are using bibTeX, add your bib file 
+name in place of BibFile in the bibliography command.
+% Remove or comment out the next two lines if you are not using bibtex.
+\bibliographystyle{aea}
+\bibliography{BibFile}
+
+% The appendix command is issued once, prior to all appendices, if any.
+\appendix
+
+\section{Mathematical Appendix}
+
+\end{document}
+
